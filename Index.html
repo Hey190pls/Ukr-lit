@@ -1,1 +1,1298 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>За сестрою — Олександр Олесь</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a0f0a;
+    --parchment: #f5ede0;
+    --gold: #c8973a;
+    --gold-light: #e8c07a;
+    --crimson: #8b1a2e;
+    --crimson-light: #c0394f;
+    --cream: #fdf6ec;
+    --warm-gray: #8a7a6e;
+    --paper: #efe5d4;
+    --shadow: rgba(26,15,10,0.15);
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, #2d1406 0%, var(--ink) 60%),
+                radial-gradient(ellipse at 80% 20%, #3a1810 0%, transparent 50%);
+  }
+
+  .hero-ornament {
+    position: absolute;
+    width: 600px; height: 600px;
+    border: 1px solid rgba(200,151,58,0.12);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: pulseOrb 6s ease-in-out infinite;
+  }
+  .hero-ornament:nth-child(2) {
+    width: 800px; height: 800px;
+    border-color: rgba(200,151,58,0.07);
+    animation-delay: -2s;
+  }
+  .hero-ornament:nth-child(3) {
+    width: 400px; height: 400px;
+    border-color: rgba(200,151,58,0.18);
+    animation-delay: -4s;
+  }
+
+  @keyframes pulseOrb {
+    0%,100% { transform: translate(-50%,-50%) scale(1); opacity:1; }
+    50% { transform: translate(-50%,-50%) scale(1.04); opacity:0.7; }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 2rem;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.65rem; font-weight: 300;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 300; font-style: italic;
+    color: var(--parchment);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    opacity: 0; animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-title span {
+    display: block;
+    font-style: normal; font-weight: 600;
+    color: var(--gold);
+    font-size: 0.45em;
+    letter-spacing: 0.1em;
+    margin-top: 0.5em;
+  }
+
+  .hero-divider {
+    width: 120px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2.5rem auto;
+    opacity: 0; animation: fadeUp 1s 0.9s forwards;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem; font-style: italic;
+    color: rgba(245,237,224,0.6);
+    letter-spacing: 0.05em;
+    opacity: 0; animation: fadeUp 1s 1.1s forwards;
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(200,151,58,0.5);
+    font-family: 'Unbounded'; font-size: 0.55rem; letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: scrollBounce 2s ease-in-out infinite;
+    opacity: 0; animation: fadeUp 1s 1.8s forwards, scrollBounce 2s 2.8s ease-in-out infinite;
+  }
+  .hero-scroll svg { width: 20px; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  @keyframes scrollBounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(26,15,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,151,58,0.2);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem;
+    height: 56px;
+  }
+
+  nav a {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,237,224,0.55);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    transition: color 0.3s, background 0.3s;
+    white-space: nowrap;
+  }
+  nav a:hover { color: var(--gold); background: rgba(200,151,58,0.08); }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    font-weight: 300; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond'; font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink); line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  /* EXCERPT */
+  #excerpt { background: transparent; }
+
+  .poem-card {
+    background: var(--ink);
+    border: 1px solid rgba(200,151,58,0.25);
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .poem-card::before {
+    content: '❝';
+    position: absolute; top: 1rem; left: 1.5rem;
+    font-size: 5rem; color: rgba(200,151,58,0.12);
+    font-family: Georgia; line-height:1;
+  }
+
+  .poem-text {
+    font-family: 'Cormorant Garamond'; font-size: 1.2rem;
+    font-style: italic; line-height: 2.1;
+    color: var(--parchment);
+    position: relative; z-index: 1;
+  }
+
+  .poem-stanza { margin-bottom: 1.8rem; }
+  .poem-stanza:last-child { margin-bottom: 0; }
+
+  .poem-attribution {
+    margin-top: 2.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    color: var(--gold); font-family: 'Unbounded';
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+  }
+  .poem-attribution::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--gold);
+  }
+
+  .summary-block {
+    margin-top: 3rem;
+    padding: 2rem 2.5rem;
+    border-left: 3px solid var(--gold);
+    background: var(--paper);
+  }
+
+  .summary-block h3 {
+    font-family: 'Unbounded'; font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--warm-gray); margin-bottom: 1rem;
+  }
+
+  .summary-block p {
+    font-size: 1.1rem; line-height: 1.9;
+    color: var(--ink);
+  }
+
+  /* BIOGRAPHY */
+  #biography { background: var(--paper); max-width: 100%; padding: 6rem 0; }
+  #biography > * { max-width: 900px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+
+  .bio-grid {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 4rem;
+    align-items: start;
+    max-width: 900px; margin: 0 auto; padding: 0 2rem;
+  }
+
+  .bio-portrait {
+    aspect-ratio: 3/4;
+    background: var(--ink);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+
+  .bio-portrait-inner {
+    font-size: 6rem; line-height: 1;
+    filter: grayscale(1) brightness(0.7);
+  }
+
+  .bio-portrait-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(26,15,10,0.9));
+    padding: 2rem 1rem 1rem;
+    color: var(--gold);
+    font-family: 'Unbounded'; font-size: 0.55rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    text-align: center;
+  }
+
+  .bio-dates {
+    display: flex; gap: 2rem; margin-bottom: 2rem;
+  }
+
+  .bio-date-item {
+    display: flex; flex-direction: column; gap: 0.25rem;
+  }
+
+  .bio-date-label {
+    font-family: 'Unbounded'; font-size: 0.55rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--warm-gray);
+  }
+
+  .bio-date-value {
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--crimson);
+  }
+
+  .bio-text p {
+    font-size: 1.08rem; line-height: 1.95;
+    color: var(--ink); margin-bottom: 1.2rem;
+  }
+
+  .bio-facts {
+    margin-top: 2rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .bio-fact {
+    padding: 1rem 1.25rem;
+    background: var(--cream);
+    border-top: 2px solid var(--gold);
+  }
+
+  .bio-fact-label {
+    font-family: 'Unbounded'; font-size: 0.55rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--warm-gray); margin-bottom: 0.4rem;
+  }
+
+  .bio-fact-value {
+    font-size: 1rem; font-style: italic;
+    color: var(--ink);
+  }
+
+  /* QUIZ */
+  #quiz { background: var(--ink); max-width: 100%; padding: 6rem 0; color: var(--parchment); }
+  #quiz .section-label { color: var(--gold-light); }
+  #quiz .section-title { color: var(--parchment); }
+  #quiz > * { max-width: 900px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+
+  .quiz-container {
+    max-width: 900px; margin: 0 auto; padding: 0 2rem;
+  }
+
+  .quiz-progress {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .quiz-progress-bar {
+    flex: 1; height: 2px;
+    background: rgba(200,151,58,0.2);
+    position: relative;
+  }
+
+  .quiz-progress-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--gold);
+    transition: width 0.5s ease;
+  }
+
+  .quiz-progress-text {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.2em; color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .quiz-question-card {
+    background: rgba(245,237,224,0.04);
+    border: 1px solid rgba(200,151,58,0.2);
+    padding: 2.5rem;
+  }
+
+  .quiz-q-number {
+    font-family: 'Unbounded'; font-size: 0.55rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(200,151,58,0.5); margin-bottom: 1rem;
+  }
+
+  .quiz-q-text {
+    font-size: 1.3rem; font-style: italic;
+    line-height: 1.6; color: var(--parchment);
+    margin-bottom: 2rem;
+  }
+
+  .quiz-options {
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+
+  .quiz-option {
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(200,151,58,0.2);
+    background: transparent;
+    color: rgba(245,237,224,0.75);
+    font-family: 'Cormorant Garamond'; font-size: 1.05rem;
+    cursor: pointer; text-align: left;
+    transition: all 0.25s;
+    display: flex; align-items: center; gap: 1rem;
+    font-style: italic;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--gold);
+    background: rgba(200,151,58,0.08);
+    color: var(--parchment);
+  }
+
+  .quiz-option.correct {
+    border-color: #5a9e5a;
+    background: rgba(90,158,90,0.12);
+    color: #a3d9a3;
+  }
+
+  .quiz-option.wrong {
+    border-color: var(--crimson);
+    background: rgba(139,26,46,0.15);
+    color: #e8a0a0;
+  }
+
+  .quiz-option-letter {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    font-style: normal;
+    color: var(--gold); width: 1.5rem; flex-shrink: 0;
+  }
+
+  .quiz-feedback {
+    margin-top: 1.5rem; padding: 1rem 1.25rem;
+    font-size: 1rem; font-style: italic;
+    border-left: 3px solid;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { border-color: #5a9e5a; color: #a3d9a3; background: rgba(90,158,90,0.08); }
+  .quiz-feedback.wrong { border-color: var(--crimson); color: #e8a0a0; background: rgba(139,26,46,0.1); }
+
+  .quiz-next-btn {
+    margin-top: 2rem;
+    font-family: 'Unbounded'; font-size: 0.65rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold);
+    border: none; padding: 0.85rem 2rem;
+    cursor: pointer; transition: all 0.25s;
+    display: none;
+  }
+
+  .quiz-next-btn.show { display: inline-block; }
+  .quiz-next-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .quiz-result {
+    text-align: center; padding: 3rem 2rem;
+    display: none;
+  }
+
+  .quiz-result.show { display: block; }
+
+  .quiz-score-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 0 auto 2rem;
+  }
+
+  .quiz-score-num {
+    font-size: 2.5rem; font-weight: 600;
+    color: var(--gold); line-height: 1;
+  }
+
+  .quiz-score-label {
+    font-family: 'Unbounded'; font-size: 0.5rem;
+    letter-spacing: 0.25em; color: rgba(200,151,58,0.6);
+  }
+
+  .quiz-result-msg {
+    font-size: 1.4rem; font-style: italic;
+    color: var(--parchment); margin-bottom: 0.75rem;
+  }
+
+  .quiz-result-sub {
+    font-size: 0.95rem; color: rgba(245,237,224,0.5);
+    margin-bottom: 2rem;
+  }
+
+  .quiz-restart-btn {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); background: transparent;
+    border: 1px solid var(--gold); padding: 0.75rem 1.75rem;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .quiz-restart-btn:hover { background: rgba(200,151,58,0.1); }
+
+  /* GAME */
+  #game { background: var(--parchment); max-width: 100%; padding: 6rem 0; }
+  #game > * { max-width: 900px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+
+  .game-container {
+    max-width: 900px; margin: 0 auto; padding: 0 2rem;
+  }
+
+  .game-tabs {
+    display: flex; gap: 0; margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(26,15,10,0.15);
+  }
+
+  .game-tab {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    background: none; border: none; cursor: pointer;
+    color: var(--warm-gray);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.25s;
+  }
+
+  .game-tab.active {
+    color: var(--crimson);
+    border-bottom-color: var(--crimson);
+  }
+
+  .game-panel { display: none; }
+  .game-panel.active { display: block; }
+
+  /* Word match game */
+  .word-match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 3rem;
+  }
+
+  .word-match-col h4 {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--warm-gray); margin-bottom: 1rem;
+  }
+
+  .word-match-item {
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(26,15,10,0.15);
+    background: var(--cream); cursor: pointer;
+    font-size: 1rem; font-style: italic;
+    transition: all 0.25s; margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .word-match-item:hover:not(.matched):not(.selected) {
+    border-color: var(--crimson);
+    background: rgba(139,26,46,0.05);
+  }
+
+  .word-match-item.selected {
+    border-color: var(--gold);
+    background: rgba(200,151,58,0.1);
+  }
+
+  .word-match-item.matched {
+    border-color: #5a9e5a;
+    background: rgba(90,158,90,0.1);
+    color: #2d6b2d; cursor: default;
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .word-match-item.wrong-flash {
+    border-color: var(--crimson);
+    background: rgba(139,26,46,0.15);
+    animation: wrongFlash 0.5s ease;
+  }
+
+  @keyframes wrongFlash {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  .match-score {
+    font-family: 'Unbounded'; font-size: 0.65rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink); margin-bottom: 1.5rem;
+  }
+
+  .match-score span { color: var(--crimson); font-weight: 700; }
+
+  /* Anagram game */
+  .anagram-box {
+    text-align: center; padding: 2rem;
+    background: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .anagram-word {
+    display: flex; justify-content: center;
+    flex-wrap: wrap; gap: 0.35rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .anagram-letter {
+    width: 44px; height: 52px;
+    background: rgba(200,151,58,0.15);
+    border: 1px solid rgba(200,151,58,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond'; font-size: 1.5rem;
+    font-weight: 600; color: var(--parchment);
+    cursor: pointer; transition: all 0.2s;
+    user-select: none;
+  }
+
+  .anagram-letter:hover { background: rgba(200,151,58,0.3); transform: translateY(-3px); }
+  .anagram-letter.used { opacity: 0.25; cursor: default; transform: none !important; }
+
+  .anagram-hint {
+    font-size: 0.9rem; font-style: italic;
+    color: rgba(245,237,224,0.5);
+  }
+
+  .anagram-input-row {
+    display: flex; justify-content: center;
+    flex-wrap: wrap; gap: 0.35rem;
+    min-height: 60px; margin-bottom: 1.5rem;
+    align-items: center;
+    padding: 0.5rem;
+    border: 1px dashed rgba(26,15,10,0.2);
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+  }
+
+  .anagram-slot {
+    width: 44px; height: 52px;
+    border: 1px solid rgba(26,15,10,0.2);
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond'; font-size: 1.5rem;
+    font-weight: 600; color: var(--ink);
+    cursor: pointer; transition: all 0.2s;
+  }
+
+  .anagram-slot:hover { border-color: var(--crimson); background: rgba(139,26,46,0.05); }
+
+  .anagram-controls {
+    display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-secondary {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    background: none; border: 1px solid var(--ink);
+    color: var(--ink); padding: 0.6rem 1.25rem;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .btn-secondary:hover { background: var(--ink); color: var(--parchment); }
+
+  .btn-primary {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--crimson); border: none;
+    color: var(--parchment); padding: 0.6rem 1.25rem;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--crimson-light); }
+
+  .anagram-result {
+    text-align: center; min-height: 2rem;
+    font-size: 1.1rem; font-style: italic;
+    padding: 0.5rem;
+  }
+
+  .anagram-result.correct { color: #2d6b2d; }
+  .anagram-result.wrong { color: var(--crimson); }
+
+  .anagram-nav {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .anagram-counter {
+    font-family: 'Unbounded'; font-size: 0.6rem;
+    letter-spacing: 0.2em; color: var(--warm-gray);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(200,151,58,0.15);
+  }
+
+  footer p {
+    font-family: 'Unbounded'; font-size: 0.55rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(200,151,58,0.35);
+  }
+
+  .footer-ornament {
+    font-size: 1.5rem; color: rgba(200,151,58,0.3);
+    display: block; margin-bottom: 1rem;
+  }
+
+  @media (max-width: 680px) {
+    .bio-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .bio-portrait { aspect-ratio: 16/9; }
+    .bio-facts { grid-template-columns: 1fr; }
+    .word-match-grid { grid-template-columns: 1fr; gap: 0; }
+    nav { gap: 0; padding: 0 0.5rem; }
+    nav a { padding: 0.5rem 0.6rem; font-size: 0.5rem; letter-spacing: 0.1em; }
+    .poem-card { padding: 2rem 1.5rem; }
+    .quiz-question-card { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Українська література · Вивчаємо разом</div>
+    <h1 class="hero-title">
+      За сестрою
+      <span>Олександр Олесь</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">Поема · 1905</p>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+    гортай
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <a href="#excerpt">Уривок</a>
+  <a href="#biography">Біографія</a>
+  <a href="#quiz">Тест</a>
+  <a href="#game">Гра</a>
+</nav>
+
+<!-- EXCERPT -->
+<section id="excerpt">
+  <div class="section-label">Художній текст</div>
+  <h2 class="section-title">Уривок з поеми</h2>
+
+  <div class="poem-card">
+    <div class="poem-text">
+      <div class="poem-stanza">
+        Шукав я сестру, шукав скрізь,<br>
+        По полях, по лісах, по ланах,<br>
+        Питав у вітру, питав у зірниць,<br>
+        Питав у хмарах і туманах.
+      </div>
+      <div class="poem-stanza">
+        — Де сестра? — питав у річки,<br>
+        Де сестра? — питав у гаю,<br>
+        Лиш луна несла слова мої<br>
+        В синю далечінь без краю.
+      </div>
+      <div class="poem-stanza">
+        Та одного дня на зорі<br>
+        Почув я тихий голос:
+        «Брате мій! Шукай мене в журбі —<br>
+        Я там, де плаче народ і колос».
+      </div>
+      <div class="poem-stanza">
+        І зрозумів я, де сестра,<br>
+        В серцях, де болем серце б'ється,<br>
+        Де правда встане на юрбу<br>
+        І воля ранком усміхнеться.
+      </div>
+    </div>
+    <div class="poem-attribution">Олександр Олесь · «За сестрою»</div>
+  </div>
+
+  <div class="summary-block">
+    <h3>Стислий зміст твору</h3>
+    <p>
+      Поема «За сестрою» Олександра Олеся — ліро-епічний твір, у якому ліричний герой-брат вирушає на пошуки зниклої сестри. Блукаючи лісами, полями й ріками, він питає природу про долю близької людини. Сестра символізує Україну, її волю та народний дух — образ алегоричний, характерний для творчості Олеся доби революції 1905 року.
+    </p>
+    <p>
+      Твір пронизаний мотивами суму, туги за втраченим, але водночас надією на звільнення. Фінал поеми — це заклик до боротьби: герой розуміє, що сестру можна знайти лише в єднанні з пригнобленим народом, у прагненні до справедливості та свободи.
+    </p>
+  </div>
+</section>
+
+<!-- BIOGRAPHY -->
+<div id="biography" style="background:var(--paper); padding: 6rem 0;">
+  <div style="max-width:900px;margin:0 auto;padding:0 2rem;">
+    <div class="section-label">Автор</div>
+    <h2 class="section-title">Олександр Олесь</h2>
+  </div>
+  <div class="bio-grid">
+    <div>
+      <div class="bio-portrait">
+        <div class="bio-portrait-inner">✍🏻</div>
+        <div class="bio-portrait-caption">Олександр Олесь<br>1878 – 1944</div>
+      </div>
+    </div>
+    <div>
+      <div class="bio-dates">
+        <div class="bio-date-item">
+          <div class="bio-date-label">Народився</div>
+          <div class="bio-date-value">1878</div>
+        </div>
+        <div class="bio-date-item">
+          <div class="bio-date-label">Помер</div>
+          <div class="bio-date-value">1944</div>
+        </div>
+      </div>
+      <div class="bio-text">
+        <p>
+          Олександр Іванович Кандиба (псевдонім — Олесь) народився 5 грудня 1878 року в місті Білопілля на Сумщині. Змалку виявляв любов до рідного слова та природи, що стало основою його неповторної лірики.
+        </p>
+        <p>
+          Навчався в Харківському ветеринарному інституті, де захопився революційними ідеями та почав активно друкуватися. Перша збірка «З журбою радість обнялась» (1907) принесла йому всеукраїнську славу.
+        </p>
+        <p>
+          Після поразки УНР емігрував до Праги (1919), де прожив решту свого життя. В еміграції продовжував писати, тяжко переживаючи розлуку з Батьківщиною. Помер 22 липня 1944 року в Празі.
+        </p>
+      </div>
+      <div class="bio-facts">
+        <div class="bio-fact">
+          <div class="bio-fact-label">Псевдонім</div>
+          <div class="bio-fact-value">Олександр Олесь</div>
+        </div>
+        <div class="bio-fact">
+          <div class="bio-fact-label">Жанри</div>
+          <div class="bio-fact-value">Лірика, поеми, драми</div>
+        </div>
+        <div class="bio-fact">
+          <div class="bio-fact-label">Перша збірка</div>
+          <div class="bio-fact-value">«З журбою радість обнялась» (1907)</div>
+        </div>
+        <div class="bio-fact">
+          <div class="bio-fact-label">Місце еміграції</div>
+          <div class="bio-fact-value">Прага, Чехословаччина</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" style="background:var(--ink); padding: 6rem 0;">
+  <div style="max-width:900px;margin:0 auto;padding:0 2rem;">
+    <div class="section-label" style="color:var(--gold-light);">Перевір себе</div>
+    <h2 class="section-title" style="color:var(--parchment);">Тест за твором</h2>
+  </div>
+  <div class="quiz-container">
+    <div class="quiz-progress">
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="quizProgressFill" style="width:0%"></div>
+      </div>
+      <div class="quiz-progress-text" id="quizProgressText">1 / 7</div>
+    </div>
+
+    <div class="quiz-question-card" id="quizCard">
+      <div class="quiz-q-number" id="quizQNum">Питання 1</div>
+      <div class="quiz-q-text" id="quizQText"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">Наступне питання →</button>
+    </div>
+
+    <div class="quiz-result" id="quizResult">
+      <div class="quiz-score-circle">
+        <div class="quiz-score-num" id="quizScoreNum">0/7</div>
+        <div class="quiz-score-label">балів</div>
+      </div>
+      <div class="quiz-result-msg" id="quizResultMsg"></div>
+      <div class="quiz-result-sub" id="quizResultSub"></div>
+      <button class="quiz-restart-btn" onclick="restartQuiz()">Спробувати знову</button>
+    </div>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="game" style="background:var(--parchment); padding: 6rem 0;">
+  <div style="max-width:900px;margin:0 auto;padding:0 2rem;">
+    <div class="section-label">Інтерактив</div>
+    <h2 class="section-title">Тематична гра</h2>
+  </div>
+  <div class="game-container">
+    <div class="game-tabs">
+      <button class="game-tab active" onclick="switchTab('match')">Знайди пару</button>
+      <button class="game-tab" onclick="switchTab('anagram')">Анаграми</button>
+    </div>
+
+    <!-- MATCH GAME -->
+    <div class="game-panel active" id="panel-match">
+      <div class="match-score">Знайдено: <span id="matchScore">0</span> / <span id="matchTotal">0</span> пар</div>
+      <div class="word-match-grid">
+        <div>
+          <h4>Слово</h4>
+          <div id="matchLeftCol"></div>
+        </div>
+        <div>
+          <h4>Значення / Пара</h4>
+          <div id="matchRightCol"></div>
+        </div>
+      </div>
+      <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+        <button class="btn-secondary" onclick="resetMatch()">Скинути гру</button>
+      </div>
+      <div id="matchComplete" style="display:none; margin-top:2rem; padding:1.5rem; background:rgba(90,158,90,0.1); border:1px solid #5a9e5a; color:#2d6b2d; font-style:italic; font-size:1.1rem; text-align:center;">
+        🎉 Чудово! Усі пари знайдено!
+      </div>
+    </div>
+
+    <!-- ANAGRAM GAME -->
+    <div class="game-panel" id="panel-anagram">
+      <div class="anagram-box">
+        <div class="anagram-word" id="anagramShuffled"></div>
+        <div class="anagram-hint" id="anagramHint"></div>
+      </div>
+      <div class="anagram-input-row" id="anagramInput" onclick="removeLastLetter()"></div>
+      <div class="anagram-result" id="anagramResult"></div>
+      <div class="anagram-controls">
+        <button class="btn-secondary" onclick="clearAnagram()">Очистити</button>
+        <button class="btn-secondary" onclick="shuffleCurrentAnagram()">Перемішати</button>
+        <button class="btn-primary" onclick="checkAnagram()">Перевірити</button>
+      </div>
+      <div class="anagram-nav">
+        <button class="btn-secondary" onclick="prevAnagram()">← Назад</button>
+        <div class="anagram-counter" id="anagramCounter">1 / 6</div>
+        <button class="btn-secondary" onclick="nextAnagram()">Далі →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-ornament">✦</span>
+  <p>Українська література · «За сестрою» · Олександр Олесь · 1905</p>
+</footer>
+
+<script>
+// =================== QUIZ ===================
+const quizData = [
+  {
+    q: "Як справжнє прізвище Олександра Олеся?",
+    opts: ["Франко", "Кандиба", "Грушевський", "Тичина"],
+    correct: 1,
+    explain: "Справжнє ім'я письменника — Олександр Іванович Кандиба. «Олесь» — літературний псевдонім."
+  },
+  {
+    q: "Де народився Олександр Олесь?",
+    opts: ["Київ", "Харків", "Білопілля (Сумщина)", "Полтава"],
+    correct: 2,
+    explain: "Олесь народився 5 грудня 1878 року в місті Білопілля на Сумщині."
+  },
+  {
+    q: "Кого символізує «сестра» у поемі?",
+    opts: ["Рідну сестру автора", "Україну та її волю", "Кохану дівчину", "Стару матір"],
+    correct: 1,
+    explain: "Образ сестри є алегорією — він символізує Україну, її волю та народний дух."
+  },
+  {
+    q: "Де ліричний герой шукає сестру спочатку?",
+    opts: ["В місті та ринках", "По полях, лісах та ланах", "У храмах та монастирях", "В морях та океанах"],
+    correct: 1,
+    explain: "Герой шукає сестру по полях, по лісах, по ланах — у природі, питаючи вітер і зірниці."
+  },
+  {
+    q: "Де сестра каже герою шукати її?",
+    opts: ["На вершині гори", "Там, де плаче народ", "У далеких краях", "У палацах і замках"],
+    correct: 1,
+    explain: "Сестра відповідає: «Шукай мене в журбі — я там, де плаче народ і колос»."
+  },
+  {
+    q: "Коли була написана поема «За сестрою»?",
+    opts: ["1900", "1905", "1912", "1917"],
+    correct: 1,
+    explain: "Твір написано у 1905 році, в час революційного піднесення в Російській імперії."
+  },
+  {
+    q: "Де провів останні роки свого життя Олександр Олесь?",
+    opts: ["Париж", "Відень", "Прага", "Варшава"],
+    correct: 2,
+    explain: "Після поразки УНР Олесь емігрував до Праги (1919), де й прожив до смерті у 1944 році."
+  }
+];
+
+let currentQ = 0, score = 0, answered = false;
+
+function loadQuestion() {
+  const q = quizData[currentQ];
+  document.getElementById('quizProgressFill').style.width = ((currentQ / quizData.length) * 100) + '%';
+  document.getElementById('quizProgressText').textContent = (currentQ + 1) + ' / ' + quizData.length;
+  document.getElementById('quizQNum').textContent = 'Питання ' + (currentQ + 1);
+  document.getElementById('quizQText').textContent = q.q;
+
+  const letters = ['А', 'Б', 'В', 'Г'];
+  const optsEl = document.getElementById('quizOptions');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.innerHTML = `<span class="quiz-option-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    optsEl.appendChild(btn);
+  });
+
+  const fb = document.getElementById('quizFeedback');
+  fb.className = 'quiz-feedback';
+  fb.textContent = '';
+  document.getElementById('quizNextBtn').className = 'quiz-next-btn';
+  answered = false;
+}
+
+function selectAnswer(idx, btn) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[currentQ];
+  const allBtns = document.querySelectorAll('.quiz-option');
+  allBtns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('quizFeedback');
+  if (idx === q.correct) {
+    btn.classList.add('correct');
+    score++;
+    fb.className = 'quiz-feedback correct show';
+    fb.textContent = '✓ Правильно! ' + q.explain;
+  } else {
+    btn.classList.add('wrong');
+    allBtns[q.correct].classList.add('correct');
+    fb.className = 'quiz-feedback wrong show';
+    fb.textContent = '✗ Неправильно. ' + q.explain;
+  }
+  document.getElementById('quizNextBtn').className = 'quiz-next-btn show';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= quizData.length) {
+    showResult();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizCard').style.display = 'none';
+  const res = document.getElementById('quizResult');
+  res.className = 'quiz-result show';
+  document.getElementById('quizProgressFill').style.width = '100%';
+  document.getElementById('quizProgressText').textContent = quizData.length + ' / ' + quizData.length;
+  document.getElementById('quizScoreNum').textContent = score + '/' + quizData.length;
+  const pct = score / quizData.length;
+  let msg, sub;
+  if (pct === 1) { msg = 'Блискуче! Ти знавець!'; sub = 'Усі відповіді правильні. Чудова робота!'; }
+  else if (pct >= 0.7) { msg = 'Молодець! Добрий результат.'; sub = 'Повтори кілька деталей і буде ідеально.'; }
+  else if (pct >= 0.5) { msg = 'Непогано, але є над чим попрацювати.'; sub = 'Перечитай уривок та біографію автора.'; }
+  else { msg = 'Варто ще раз опрацювати матеріал.'; sub = 'Не засмучуйся — перечитай і спробуй знову!'; }
+  document.getElementById('quizResultMsg').textContent = msg;
+  document.getElementById('quizResultSub').textContent = sub;
+}
+
+function restartQuiz() {
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById('quizCard').style.display = '';
+  document.getElementById('quizResult').className = 'quiz-result';
+  loadQuestion();
+}
+
+loadQuestion();
+
+// =================== TABS ===================
+function switchTab(tab) {
+  document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// =================== MATCH GAME ===================
+const matchPairs = [
+  { left: "Сестра", right: "Символ України та волі" },
+  { left: "Братній голос", right: "Поклик до єдності народу" },
+  { left: "Поля та ліси", right: "Простори рідного краю" },
+  { left: "Журба", right: "Народне горе й страждання" },
+  { left: "Воля", right: "Свобода, до якої прагне герой" },
+  { left: "1905 рік", right: "Час написання поеми" },
+];
+
+let selectedLeft = null, selectedRight = null;
+let matchedCount = 0;
+
+function renderMatch() {
+  const shuffledRight = [...matchPairs].map(p => p.right).sort(() => Math.random() - 0.5);
+  document.getElementById('matchTotal').textContent = matchPairs.length;
+  document.getElementById('matchScore').textContent = 0;
+  matchedCount = 0;
+
+  const leftCol = document.getElementById('matchLeftCol');
+  const rightCol = document.getElementById('matchRightCol');
+  leftCol.innerHTML = '';
+  rightCol.innerHTML = '';
+
+  matchPairs.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'word-match-item';
+    el.textContent = p.left;
+    el.dataset.idx = i;
+    el.dataset.side = 'left';
+    el.onclick = () => handleMatchClick(el);
+    leftCol.appendChild(el);
+  });
+
+  shuffledRight.forEach((r, i) => {
+    const pairIdx = matchPairs.findIndex(p => p.right === r);
+    const el = document.createElement('div');
+    el.className = 'word-match-item';
+    el.textContent = r;
+    el.dataset.pairIdx = pairIdx;
+    el.dataset.side = 'right';
+    el.onclick = () => handleMatchClick(el);
+    rightCol.appendChild(el);
+  });
+}
+
+function handleMatchClick(el) {
+  if (el.classList.contains('matched')) return;
+  const side = el.dataset.side;
+
+  if (side === 'left') {
+    if (selectedLeft) selectedLeft.classList.remove('selected');
+    if (selectedLeft === el) { selectedLeft = null; return; }
+    selectedLeft = el;
+    el.classList.add('selected');
+  } else {
+    if (selectedRight) selectedRight.classList.remove('selected');
+    if (selectedRight === el) { selectedRight = null; return; }
+    selectedRight = el;
+    el.classList.add('selected');
+  }
+
+  if (selectedLeft && selectedRight) {
+    const lIdx = parseInt(selectedLeft.dataset.idx);
+    const rIdx = parseInt(selectedRight.dataset.pairIdx);
+    if (lIdx === rIdx) {
+      selectedLeft.classList.remove('selected'); selectedLeft.classList.add('matched');
+      selectedRight.classList.remove('selected'); selectedRight.classList.add('matched');
+      matchedCount++;
+      document.getElementById('matchScore').textContent = matchedCount;
+      if (matchedCount === matchPairs.length) {
+        document.getElementById('matchComplete').style.display = 'block';
+      }
+      selectedLeft = null; selectedRight = null;
+    } else {
+      const l = selectedLeft, r = selectedRight;
+      l.classList.add('wrong-flash'); r.classList.add('wrong-flash');
+      selectedLeft = null; selectedRight = null;
+      setTimeout(() => {
+        l.classList.remove('wrong-flash', 'selected');
+        r.classList.remove('wrong-flash', 'selected');
+      }, 500);
+    }
+  }
+}
+
+function resetMatch() {
+  document.getElementById('matchComplete').style.display = 'none';
+  selectedLeft = null; selectedRight = null;
+  renderMatch();
+}
+
+renderMatch();
+
+// =================== ANAGRAM GAME ===================
+const anagramWords = [
+  { word: "СЕСТРА", hint: "Кого шукає ліричний герой?" },
+  { word: "ВОЛЯ", hint: "До чого прагне народ?" },
+  { word: "ОЛЕСЬ", hint: "Псевдонім автора поеми" },
+  { word: "ЖУРБА", hint: "Де знаходиться сестра?" },
+  { word: "БРАТЕ", hint: "Як сестра звертається до героя?" },
+  { word: "НАРОД", hint: "З ким пов'язана доля сестри?" },
+];
+
+let currentAnagram = 0;
+let shuffledLetters = [];
+let inputLetters = [];
+
+function initAnagram(idx) {
+  const item = anagramWords[idx];
+  inputLetters = [];
+  shuffledLetters = item.word.split('').map((l, i) => ({ letter: l, origIdx: i, used: false }));
+  shuffleArray(shuffledLetters);
+  document.getElementById('anagramResult').textContent = '';
+  document.getElementById('anagramResult').className = 'anagram-result';
+  document.getElementById('anagramCounter').textContent = (idx + 1) + ' / ' + anagramWords.length;
+  document.getElementById('anagramHint').textContent = '💡 ' + item.hint;
+  renderAnagram();
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function renderAnagram() {
+  const shuffledEl = document.getElementById('anagramShuffled');
+  shuffledEl.innerHTML = '';
+  shuffledLetters.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'anagram-letter' + (item.used ? ' used' : '');
+    el.textContent = item.letter;
+    if (!item.used) el.onclick = () => pickLetter(i);
+    shuffledEl.appendChild(el);
+  });
+
+  const inputEl = document.getElementById('anagramInput');
+  inputEl.innerHTML = '';
+  inputLetters.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'anagram-slot';
+    el.textContent = item.letter;
+    el.onclick = () => removeLetterAt(i);
+    inputEl.appendChild(el);
+  });
+  if (inputLetters.length === 0) {
+    inputEl.innerHTML = '<span style="color:rgba(26,15,10,0.3);font-style:italic;font-size:0.9rem;">Клікай на літери вгорі</span>';
+  }
+}
+
+function pickLetter(idx) {
+  if (shuffledLetters[idx].used) return;
+  shuffledLetters[idx].used = true;
+  inputLetters.push({ letter: shuffledLetters[idx].letter, shuffledIdx: idx });
+  document.getElementById('anagramResult').textContent = '';
+  document.getElementById('anagramResult').className = 'anagram-result';
+  renderAnagram();
+}
+
+function removeLetterAt(idx) {
+  const removed = inputLetters.splice(idx, 1)[0];
+  shuffledLetters[removed.shuffledIdx].used = false;
+  renderAnagram();
+}
+
+function removeLastLetter() {
+  if (inputLetters.length === 0) return;
+  const removed = inputLetters.pop();
+  shuffledLetters[removed.shuffledIdx].used = false;
+  renderAnagram();
+}
+
+function clearAnagram() {
+  inputLetters.forEach(item => { shuffledLetters[item.shuffledIdx].used = false; });
+  inputLetters = [];
+  document.getElementById('anagramResult').textContent = '';
+  document.getElementById('anagramResult').className = 'anagram-result';
+  renderAnagram();
+}
+
+function shuffleCurrentAnagram() {
+  clearAnagram();
+  shuffleArray(shuffledLetters);
+  renderAnagram();
+}
+
+function checkAnagram() {
+  const answer = inputLetters.map(i => i.letter).join('');
+  const correct = anagramWords[currentAnagram].word;
+  const resEl = document.getElementById('anagramResult');
+  if (answer === correct) {
+    resEl.textContent = '✓ Правильно! «' + correct + '»';
+    resEl.className = 'anagram-result correct';
+  } else if (answer.length < correct.length) {
+    resEl.textContent = 'Ще не всі літери використані';
+    resEl.className = 'anagram-result wrong';
+  } else {
+    resEl.textContent = '✗ Спробуй ще раз!';
+    resEl.className = 'anagram-result wrong';
+  }
+}
+
+function nextAnagram() {
+  currentAnagram = (currentAnagram + 1) % anagramWords.length;
+  initAnagram(currentAnagram);
+}
+
+function prevAnagram() {
+  currentAnagram = (currentAnagram - 1 + anagramWords.length) % anagramWords.length;
+  initAnagram(currentAnagram);
+}
+
+initAnagram(0);
+</script>
+</body>
+</html>
